@@ -428,6 +428,7 @@ disable = [
     'attribute-defined-outside-init',
     'function-redefined',
     'misplaced-bare-raise',
+    'redefined-variable-type',
     # Let ruff handle long lines
     'line-too-long',
     # Let ruff handle unused imports
