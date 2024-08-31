@@ -411,6 +411,10 @@ disable = [
     'bad-builtin',
     'disallowed-name',
     'consider-alternative-union-syntax',
+    'deprecated-method',
+    'import-outside-toplevel',
+    'broad-exception-raised',
+    'bad-dunder-name',
     # Let ruff handle long lines
     'line-too-long',
     # Let ruff handle unused imports
