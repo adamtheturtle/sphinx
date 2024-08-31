@@ -415,6 +415,10 @@ disable = [
     'import-outside-toplevel',
     'broad-exception-raised',
     'bad-dunder-name',
+    'import-error',
+    'use-set-for-membership',
+    'use-implicit-booleaness-not-len',
+    'use-implicit-booleaness-not-comparison',
     # Let ruff handle long lines
     'line-too-long',
     # Let ruff handle unused imports
