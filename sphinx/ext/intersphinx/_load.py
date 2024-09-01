@@ -140,7 +140,7 @@ def load_mappings(app: Sphinx) -> None:
     intersphinx_cache: dict[InventoryURI, InventoryCacheEntry] = inventories.cache
     intersphinx_mapping: IntersphinxMapping = app.config.intersphinx_mapping
 
-    projects = []
+    projects: list[_IntersphinxProject] = []
     for name, (uri, locations) in intersphinx_mapping.values():
         try:
             project = _IntersphinxProject(name=name, target_uri=uri, locations=locations)
@@ -211,7 +211,10 @@ def _fetch_inventory_group(
 
     for location in project.locations:
         # location is either None or a non-empty string
-        inv = f'{project.target_uri}/{INVENTORY_FILENAME}' if location is None else location
+        if location is None:
+            inv = posixpath.join(project.target_uri, INVENTORY_FILENAME)
+        else:
+            inv = location
 
         # decide whether the inventory must be read: always read local
         # files; remote ones only if the cache time is expired

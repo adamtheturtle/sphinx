@@ -189,7 +189,7 @@ def make_app(test_params: dict[str, Any]) -> Iterator[Callable[[], SphinxTestApp
     if you want to initialize 'app' in your test function. please use this
     instead of using SphinxTestApp class directory.
     """
-    apps = []
+    apps: list[SphinxTestApp] = []
     syspath = sys.path.copy()
 
     def make(*args: Any, **kwargs: Any) -> SphinxTestApp:
@@ -239,7 +239,7 @@ def if_graphviz_found(app: SphinxTestApp) -> None:  # NoQA: PT004
 
 
 @pytest.fixture(scope='session')
-def sphinx_test_tempdir(tmp_path_factory: Any) -> Path:
+def sphinx_test_tempdir(tmp_path_factory: pytest.TempPathFactory) -> Path:
     """Temporary directory."""
     return tmp_path_factory.getbasetemp()
 
