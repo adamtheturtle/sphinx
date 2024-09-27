@@ -92,6 +92,7 @@ lint = [
     "types-requests==2.32.0.20240914",  # align with requests
     "types-urllib3==1.26.25.14",
     "tomli>=2",  # for mypy (Python<=3.10)
+    "pyright==1.1.382.post0",
     "pytest>=6.0",
 ]
 test = [
@@ -303,3 +304,21 @@ exclude_lines = [
     'if __name__ == .__main__.:',
 ]
 ignore_errors = true
+
+[tool.pyright]
+typeCheckingMode = "strict"
+reportOptionalMemberAccess = "none"
+reportUnknownVariableType = "none"
+reportUnknownMemberType = "none"
+reportUnknownLambdaType = "none"
+reportOperatorIssue = "none"
+reportUnusedVariable = "none"
+reportUnknownArgumentType = "none"
+reportIndexIssue = "none"
+reportConstantRedefinition = "none"
+reportArgumentType = "none"
+reportMissingTypeArgument = "none"
+reportPossiblyUnboundVariable = "none"
+reportAttributeAccessIssue = "none"
+reportUnnecessaryComparison = "none"
+reportUnknownParameterType = "none"
