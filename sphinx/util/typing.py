@@ -153,7 +153,7 @@ else:
     ]
 
 # A option spec for directive
-type OptionSpec = dict[str, Callable[[str], typing.Any]]
+type OptionSpec = dict[str, Callable[[str], object]]
 
 # title getter functions for enumerable nodes (see sphinx.domains.std)
 type TitleGetter = Callable[[nodes.Node], str]

@@ -72,11 +72,47 @@ from typing import (
     Tuple,
     TypeVar,
     Union,
+    assert_type,
 )
 from weakref import WeakSet
 
+from docutils.parsers.rst import directives
+
+from sphinx.directives.code import CodeBlock, LiteralInclude
 from sphinx.ext.autodoc._dynamic._mock import mock
-from sphinx.util.typing import _INVALID_BUILTIN_CLASSES, restify, stringify_annotation
+from sphinx.util.typing import (
+    _INVALID_BUILTIN_CLASSES,
+    restify,
+    stringify_annotation,
+)
+
+if t.TYPE_CHECKING:
+    from typing import ClassVar
+
+    from sphinx.util.typing import OptionSpec
+
+
+def test_option_spec() -> None:
+    class CustomCodeBlock(CodeBlock):
+        option_spec: ClassVar[OptionSpec] = CodeBlock.option_spec.copy()
+
+    class CustomLiteralInclude(LiteralInclude):
+        option_spec: ClassVar[OptionSpec] = LiteralInclude.option_spec.copy()
+
+    for directive in (CustomCodeBlock, CustomLiteralInclude):
+        directive.option_spec.update({
+            'custom-flag': directives.flag,
+            'custom-text': directives.unchanged,
+            'custom-number': int,
+        })
+        assert assert_type(directive.option_spec['custom-flag'](''), object) is None
+        assert (
+            assert_type(directive.option_spec['custom-text']('text'), object) == 'text'
+        )
+        assert assert_type(directive.option_spec['custom-number']('42'), object) == 42
+
+    assert 'custom-flag' not in CodeBlock.option_spec
+    assert 'custom-flag' not in LiteralInclude.option_spec
 
 
 class MyClass1:
