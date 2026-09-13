@@ -8,6 +8,10 @@ Bugs fixed
   so extensions can reuse the alias without introducing ``Any``.
   Patch by Adam Dangoor
 
+* Support Docutils 1.0's doctest nodes and table column widths in the doctest,
+  autosummary, text, LaTeX, and Texinfo extensions and writers.
+  Patch by Adam Dangoor
+
 * #14465: LaTeX: PDF build crash since LaTeX June 2026 release if tables are
   styled with ``'colorrows'`` (which is the default).
   Patch by Jean-François B.
